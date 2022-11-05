@@ -4,7 +4,7 @@ import styles from "src/styles/Home.module.css";
 import { Header } from "src/components/Header";
 import { Footer } from "src/components/Footer";
 import { Main } from "src/components/Main";
-import { useCallback, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // コンポーネントの外にメソッドを書く場合
 // const handleClick = (e) => {
@@ -14,20 +14,16 @@ import { useCallback, useEffect } from "react";
 // };
 
 export default function Home() {
-  const foo = 1;
+  const [count, setCount] = useState(10)
 
-  const handleClick = useCallback((e) => {
-    console.log(e.target.value);
-    e.preventDefault();
-    alert(foo);
-  }, []);
+  const handleClick = (e) => {
+    setCount((count) => count + 1);
+    setCount((count) => count + 1);
+  };
 
   useEffect(() => {
-    console.log("マウントしました");
     document.body.style.backgroundColor = "lightblue";
-
     return () => {
-      console.log("アンマウントしました");
       document.body.style.backgroundColor = "";
     };
   }, []);
@@ -38,12 +34,8 @@ export default function Home() {
         <title>Index Page</title>
       </Head>
       <Header />
-      <Link
-        href='/about'
-        legacyBehavior
-      >
-        <a onClick={handleClick}>ボタン</a>
-      </Link>
+      <h1>{count}</h1>
+      <button onClick={handleClick}>ボタン</button>
       <Main page='index' />
       <Footer />
     </div>
