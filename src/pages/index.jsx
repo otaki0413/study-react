@@ -1,10 +1,10 @@
 import Head from "next/head";
+import Link from "next/link";
 import styles from "src/styles/Home.module.css";
 import { Header } from "src/components/Header";
 import { Footer } from "src/components/Footer";
 import { Main } from "src/components/Main";
-import { useCallback } from "react";
-import Link from "next/link";
+import { useCallback, useEffect } from "react";
 
 // コンポーネントの外にメソッドを書く場合
 // const handleClick = (e) => {
@@ -22,6 +22,16 @@ export default function Home() {
     alert(foo);
   }, []);
 
+  useEffect(() => {
+    console.log("マウントしました");
+    document.body.style.backgroundColor = "lightblue";
+
+    return () => {
+      console.log("アンマウントしました");
+      document.body.style.backgroundColor = "";
+    };
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -30,10 +40,9 @@ export default function Home() {
       <Header />
       <Link
         href='/about'
-        onClick={handleClick}
         legacyBehavior
       >
-        <a>ボタン</a>
+        <a onClick={handleClick}>ボタン</a>
       </Link>
       <Main page='index' />
       <Footer />
