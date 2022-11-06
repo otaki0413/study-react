@@ -16,14 +16,16 @@ export default function Home() {
     (e) => {
       console.log(count);
       if (count < 10) {
-        setCount((count) => count + 1);
+        setCount((prevCount) => prevCount + 1);
       }
-    }, [count]);
+    },
+    [count]
+  );
 
   // 表示・非表示ボタン押下時の処理
-  const handleDisplay = () => {
-    setIsShow((isShow) => !isShow);
-  };
+  const handleDisplay = useCallback(() => {
+    setIsShow((prevIsShow) => !prevIsShow);
+  }, []);
 
   useEffect(() => {
     document.body.style.backgroundColor = "lightblue";
