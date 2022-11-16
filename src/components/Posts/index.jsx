@@ -1,47 +1,71 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useReducer } from "react";
+
+const initialState = {
+  data: [],
+  loading: true,
+  error: null,
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "end":
+      return {
+        ...state,
+        data: action.data,
+        loading: false,
+      };
+    case "error":
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    default: {
+      throw new Error("no such action type!");
+    }
+  }
+};
 
 export const Posts = (props) => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const getPosts = useCallback(async () => {
     try {
-      // 成功時の処理
-      const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+      const res = await fetch(
+        "https://jsonplaceholder.typicode.com/postsaaaaa"
+      );
       if (!res.ok) {
         throw new Error("エラーが発生したため、データの取得に失敗しました。");
       }
       const json = await res.json();
-      setPosts(json);
+      dispatch({ type: "end", data: json });
     } catch (error) {
-      // 失敗時の処理
-      setError(error);
+      dispatch({ type: "error", error });
     }
-    // 成功・失敗に関わらずfalseにする
-    setLoading(false);
   }, []);
 
   useEffect(() => {
     getPosts();
   }, [getPosts]);
 
-  if (loading) {
+  console.log("foo");
+
+  if (state.loading) {
     return <div>ローディング中です</div>;
   }
 
-  if (error) {
-    return <div>{error.message}</div>;
+  if (state.error) {
+    return <div>{state.error.message}</div>;
   }
 
-  if (posts.length === 0) {
+  if (state.data.length === 0) {
     return <div>データがありませんでした。</div>;
   }
 
   return (
     <div>
       <ol>
-        {posts.map((post) => {
+        {state.data.map((post) => {
           return <li key={post.id}>{post.title}</li>;
         })}
       </ol>
