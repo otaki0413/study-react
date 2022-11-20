@@ -1,13 +1,7 @@
 import "src/styles/globals.css";
 import Head from "next/head";
-import { useCounter } from "src/hooks/useCounter";
-import { useInputArray } from "src/hooks/useInputArray";
-import { useBgColor } from "src/hooks/useBgColor";
 
 const MyApp = ({ Component, pageProps }) => {
-  const counter = useCounter();
-  const inputArray = useInputArray();
-  useBgColor();
   return (
     <>
       <Head>
@@ -20,13 +14,9 @@ const MyApp = ({ Component, pageProps }) => {
           href='/favicon.ico'
         />
       </Head>
-      <Component
-        {...pageProps}
-        {...counter}
-        {...inputArray}
-      />
+      <Component {...pageProps} />
     </>
   );
-}
+};
 
 export default MyApp;
