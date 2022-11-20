@@ -1,10 +1,8 @@
 import Head from "next/head";
 import { usePost } from "src/hooks/usePost";
 
-export const Post = () => {
+export const PostComponent = () => {
   const { post, user, error, isLoading } = usePost();
-
-  // console.log(post, user, error, isLoading);
 
   if (isLoading) {
     return <div>ローディング中です</div>;
