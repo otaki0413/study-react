@@ -14,27 +14,25 @@ const useFetchArray = (url) => {
 
 const API_URL = "https://jsonplaceholder.typicode.com";
 
-// commentsのAPIを叩く用のカスタムフック
-export const useComments = () => {
-  return useFetchArray(`${API_URL}/comments`);
-};
-
-// postsのAPIを叩く用のカスタムフック
+// posts
 export const usePosts = () => {
   return useFetchArray(`${API_URL}/posts`);
 };
 
-// usersのAPIを叩く用のカスタムフック
+export const usePostsByUserId = (id) => {
+  return useFetchArray(id ? `${API_URL}/posts?userId=${id}` : null);
+};
+
+// users
 export const useUsers = () => {
   return useFetchArray(`${API_URL}/users`);
 };
 
-// postIdに紐づくcommentsのAPIを叩く用のカスタムフック
-export const useCommentsByPostsId = (id) => {
-  return useFetchArray(id ? `${API_URL}/comments?postId=${id}` : null);
+// comments
+export const useComments = () => {
+  return useFetchArray(`${API_URL}/comments`);
 };
 
-// userIdに紐づくpostsのAPIを叩く用のカスタムフック
-export const usePostsByUserId = (id) => {
-  return useFetchArray(id ? `${API_URL}/posts?userId=${id}` : null);
+export const useCommentsByPostId = (id) => {
+  return useFetchArray(id ? `${API_URL}/comments?postId=${id}` : null);
 };

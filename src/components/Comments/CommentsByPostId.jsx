@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useCommentsByPostsId } from "src/hooks/useFetchArray";
+import { useCommentsByPostId } from "src/hooks/useFetchArray";
 
 export const CommentsByPostId = (props) => {
   const {
@@ -7,7 +7,7 @@ export const CommentsByPostId = (props) => {
     error,
     isLoading,
     isEmpty,
-  } = useCommentsByPostsId(props.id);
+  } = useCommentsByPostId(props.id);
 
   if (isLoading) {
     return <p>Loading...</p>;
