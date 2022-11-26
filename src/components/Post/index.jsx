@@ -1,8 +1,10 @@
 import Head from "next/head";
+import { CommentsByPostId } from "src/components/Comments/CommentsByPostId";
+import { UserByUserId } from "src/components/User/UserByUserId";
 import { usePost } from "src/hooks/usePost";
 
 export const PostComponent = () => {
-  const { post, user, error, isLoading } = usePost();
+  const { data, error, isLoading } = usePost();
 
   if (isLoading) {
     return <div>ローディング中です</div>;
@@ -15,11 +17,12 @@ export const PostComponent = () => {
   return (
     <div>
       <Head>
-        <title>{post?.title}</title>
+        <title>{data?.title}</title>
       </Head>
-      <h1>{post?.title}</h1>
-      <p>{post?.body}</p>
-      {user?.name ? <p>Created by {user.name}</p> : null}
+      <h1>{data?.title}</h1>
+      <p>{data?.body}</p>
+      <UserByUserId id={data.userId} />
+      <CommentsByPostId id={data.id} />
     </div>
   );
 };

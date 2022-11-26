@@ -1,7 +1,7 @@
 import { fetcher } from "src/utils/fetcher";
 import useSWR from "swr";
 
-// 共通のカスタムフックの形式
+// 共通のカスタムフック
 const useFetchArray = (url) => {
   const { data, error } = useSWR(url, fetcher);
   return {
@@ -27,4 +27,9 @@ export const usePosts = () => {
 // usersのAPIを叩く用のカスタムフック
 export const useUsers = () => {
   return useFetchArray(`${API_URL}/users`);
+};
+
+// postIdに紐づくcommentsのAPIを叩く用のカスタムフック
+export const useCommentsByPostsId = (id) => {
+  return useFetchArray(id ? `${API_URL}/comments?postId=${id}` : null);
 };
