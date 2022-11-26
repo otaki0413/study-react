@@ -33,3 +33,8 @@ export const useUsers = () => {
 export const useCommentsByPostsId = (id) => {
   return useFetchArray(id ? `${API_URL}/comments?postId=${id}` : null);
 };
+
+// userIdに紐づくpostsのAPIを叩く用のカスタムフック
+export const usePostsByUserId = (id) => {
+  return useFetchArray(id ? `${API_URL}/posts?userId=${id}` : null);
+};
