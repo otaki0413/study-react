@@ -3,7 +3,7 @@ import useSWR from "swr";
 
 // 共通のカスタムフック
 const useFetchArray = (url) => {
-  const { data, error } = useSWR(url, fetcher);
+  const { data, error } = useSWR(url);
   return {
     data,
     error,
