@@ -1,6 +1,6 @@
-import { Header } from 'src/components/Header';
-import { UserComponent } from 'src/components/User';
-import { SWRConfig } from 'swr';
+import { Header } from "src/components/Header";
+import { UserComponent } from "src/components/User";
+import { SWRConfig } from "swr";
 
 export const getServerSideProps = async (ctx) => {
   const { id } = ctx.query;

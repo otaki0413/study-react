@@ -1,8 +1,8 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
-import { CommentsByPostId } from "src/components/Comments/CommentsByPostId";
-import { UserByUserId } from "src/components/User/UserByUserId";
-import { usePost } from "src/hooks/usePost";
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { CommentsByPostId } from 'src/components/Comments/CommentsByPostId';
+import { UserByUserId } from 'src/components/User/UserByUserId';
+import { usePost } from 'src/hooks/usePost';
 
 export const PostComponent = () => {
   const router = useRouter();
@@ -23,11 +23,11 @@ export const PostComponent = () => {
       </Head>
       <UserByUserId id={data.userId} />
 
-      <h1 className='text-xl font-bold'>{data?.title}</h1>
-      <p className='text-xl text-gray-900'>{data?.body}</p>
+      <h1 className="text-xl font-bold">{data?.title}</h1>
+      <p className="text-xl text-gray-900">{data?.body}</p>
 
-      <h2 className='text-xl font-bold mt-10'>コメント一覧</h2>
-      <div className='mt-2'>
+      <h2 className="text-xl font-bold mt-10">コメント一覧</h2>
+      <div className="mt-2">
         <CommentsByPostId id={data.id} />
       </div>
     </div>

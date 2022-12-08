@@ -3,6 +3,7 @@ import { useUser } from "src/hooks/useUser";
 
 export const UserComponent = () => {
   const { data, error, isLoading } = useUser();
+  console.log(data); // SSRにより事前にデータ取得
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -14,9 +15,9 @@ export const UserComponent = () => {
 
   return (
     <div>
-      <h1 className='font-bold text-3xl'>{data.name}</h1>
-      <h2 className='text-xl font-bold mt-10'>詳細</h2>
-      <ul className='list-inside list-disc mt-2 text-xl'>
+      <h1 className="font-bold text-3xl">{data.name}</h1>
+      <h2 className="text-xl font-bold mt-10">詳細</h2>
+      <ul className="list-inside list-disc mt-2 text-xl">
         <li>メール：{data.email}</li>
         <li>アカウント名:{data.username}</li>
         <li>住所:{data.address.city}</li>
@@ -25,8 +26,8 @@ export const UserComponent = () => {
         <li>勤務先:{data.company.name}</li>
       </ul>
 
-      <h2 className='text-xl font-bold mt-10'>投稿</h2>
-      <div className='mt-2'>
+      <h2 className="text-xl font-bold mt-10">投稿</h2>
+      <div className="mt-2">
         <PostsByUserId id={data.id} />
       </div>
     </div>
