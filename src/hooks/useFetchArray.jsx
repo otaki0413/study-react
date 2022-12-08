@@ -1,9 +1,10 @@
-import { fetcher } from "src/utils/fetcher";
+// import { fetcher } from "src/utils/fetcher";
 import useSWR from "swr";
 
 // 共通のカスタムフック
 const useFetchArray = (url) => {
   const { data, error } = useSWR(url);
+
   return {
     data,
     error,
