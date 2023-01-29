@@ -2,9 +2,11 @@ import { CommentComponent } from "src/components/Comment";
 import { Header } from "src/components/Header";
 import { SWRConfig } from "swr";
 
-// pathを取得
+// path情報を取得
 export const getStaticPaths = async () => {
-  const comments = await fetch("https://jsonplaceholder.typicode.com/comments");
+  const comments = await fetch(
+    "https://jsonplaceholder.typicode.com/comments?_limit=10"
+  );
   const commentsData = await comments.json();
   const paths = commentsData.map((comment) => ({
     params: { id: comment.id.toString() },
@@ -12,7 +14,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: "blocking",
   };
 };
 
@@ -20,8 +22,15 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (ctx) => {
   const { id } = ctx.params;
   const COMMENT_API_URL = `https://jsonplaceholder.typicode.com/comments/${id}`;
-  const comments = await fetch(COMMENT_API_URL);
-  const commentsData = await comments.json();
+  const comment = await fetch(COMMENT_API_URL);
+
+  if (!comment.ok) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const commentsData = await comment.json();
   console.log(`comments/${id}のページをSGしました。`);
 
   return {

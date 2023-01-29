@@ -17,16 +17,17 @@ export const CommentsComponent = () => {
   }
 
   return (
-    <ul className='space-y-2'>
+    <ul className="space-y-2">
       {data.map((comment) => {
         return (
           <li
             key={comment.id}
-            className='border-b pb-2'
+            className="border-b pb-2"
           >
             <Link
-              className='block hover:text-blue-500'
+              className="block hover:text-blue-500"
               href={`/comments/${comment.id}`}
+              prefetch={false}
             >
               {comment.body}
             </Link>
