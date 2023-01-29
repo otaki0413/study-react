@@ -2,16 +2,24 @@ import { Header } from "src/components/Header";
 import { UserComponent } from "src/components/User";
 import { SWRConfig } from "swr";
 
+// SSRを使用して、複数のAPIを叩く例
 export const getServerSideProps = async (ctx) => {
+  // ユーザーの情報の取得
   const { id } = ctx.query;
-  const API_URL = `https://jsonplaceholder.typicode.com/users/${id}`;
-  const user = await fetch(API_URL);
+  const USER_API_URL = `https://jsonplaceholder.typicode.com/users/${id}`;
+  const user = await fetch(USER_API_URL);
   const userData = await user.json();
+
+  // ユーザーの投稿の取得
+  const POSTS_API_URL = `https://jsonplaceholder.typicode.com/posts?userId=${userData.id}`;
+  const posts = await fetch(POSTS_API_URL);
+  const postsData = await posts.json();
 
   return {
     props: {
       fallback: {
-        [API_URL]: userData,
+        [USER_API_URL]: userData,
+        [POSTS_API_URL]: postsData,
       },
     },
   };

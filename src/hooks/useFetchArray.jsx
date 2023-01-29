@@ -1,9 +1,9 @@
-// import { fetcher } from "src/utils/fetcher";
-import useSWR from "swr";
+import useSWRImmutable from "swr/immutable";
 
 // 共通のカスタムフック
 const useFetchArray = (url) => {
-  const { data, error } = useSWR(url);
+  // 一度リクエストを実行後、リクエストは行わない
+  const { data, error } = useSWRImmutable(url);
 
   return {
     data,
