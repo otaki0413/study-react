@@ -4,7 +4,7 @@ import { usePost } from "src/hooks/usePost";
 export const PostByCommentId = (props) => {
   const { data, error, isLoading } = usePost(props.id);
 
-  console.log(data, error, isLoading);
+  // console.log(data, error, isLoading);
   if (isLoading) {
     return <div>ローディング中です</div>;
   }

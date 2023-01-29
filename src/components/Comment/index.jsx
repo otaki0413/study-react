@@ -4,7 +4,6 @@ import { useComment } from "src/hooks/useComment";
 export const CommentComponent = () => {
   const { data, error, isLoading } = useComment();
 
-  console.log(data);
   if (isLoading) {
     return <div>Loading...</div>;
   }

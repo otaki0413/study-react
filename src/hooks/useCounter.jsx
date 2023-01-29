@@ -11,7 +11,7 @@ export const useCounter = () => {
   // ボタン押下時の処理
   const handleClick = useCallback(
     (e) => {
-      console.log(count);
+      // console.log(count);
       if (count < 10) {
         setCount((prevCount) => prevCount + 1);
       }
