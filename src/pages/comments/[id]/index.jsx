@@ -17,7 +17,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-// コメント情報をSG化
+// コメント情報をSG化（基本的に1度しか処理が走らない）
 export const getStaticProps = async (ctx) => {
   const { id } = ctx.params;
   const COMMENT_API_URL = `${API_URL}/comments/${id}`;
@@ -27,6 +27,7 @@ export const getStaticProps = async (ctx) => {
   if (!comment.ok) {
     return {
       notFound: true,
+      revalidate: 10000,
     };
   }
 
@@ -39,6 +40,7 @@ export const getStaticProps = async (ctx) => {
         [COMMENT_API_URL]: commentsData,
       },
     },
+    revalidate: 1,
   };
 };
 
