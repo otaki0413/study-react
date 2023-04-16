@@ -1,8 +1,11 @@
 import Link from "next/link";
-import { usePostsByUserId } from "src/hooks/useFetchArray";
+import { useFetchArray } from "src/hooks/useFetchArray";
+import { API_URL } from "src/utils/const";
 
-export const PostsByUserId = (props) => {
-  const { data, error, isLoading, isEmpty } = usePostsByUserId(props.id);
+export const PostListByUserId = (props) => {
+  const { data, error, isLoading, isEmpty } = useFetchArray(
+    props.id ? `${API_URL}/users/${props.id}/posts` : null
+  );
 
   if (isLoading) {
     return <div>ローディング中です</div>;
@@ -17,18 +20,18 @@ export const PostsByUserId = (props) => {
   }
 
   return (
-    <ul className='space-y-4'>
+    <ul className="space-y-4">
       {data.map((post) => {
         return (
           <li key={post.id}>
             <Link
-              className='block group'
+              className="block group"
               href={`/posts/${post.id}`}
             >
-              <h1 className='text-xl font-bold group-hover:text-blue-400'>
+              <h1 className="text-xl font-bold group-hover:text-blue-400">
                 {post.title}
               </h1>
-              <p className='text-lg text-gray-500 group-hover:text-blue-400'>
+              <p className="text-lg text-gray-500 group-hover:text-blue-400">
                 {post.body}
               </p>
             </Link>

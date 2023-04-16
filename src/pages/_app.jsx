@@ -1,6 +1,6 @@
 import "src/styles/globals.css";
 import Head from "next/head";
-import { Layout } from "src/components/Layout";
+import { AppLayout } from "src/layouts/AppLayout";
 import { SWRConfig } from "swr";
 
 // SWRで使用するfetcherの作成
@@ -24,9 +24,9 @@ const MyApp = ({ Component, pageProps }) => {
         />
       </Head>
       <SWRConfig value={{ fetcher }}>
-        <Layout>
+        <AppLayout>
           <Component {...pageProps} />
-        </Layout>
+        </AppLayout>
       </SWRConfig>
     </>
   );
