@@ -1,3 +1,4 @@
+import { API_URL } from "src/utils/const";
 import useSWRImmutable from "swr/immutable";
 
 // 共通のカスタムフック
@@ -12,8 +13,6 @@ const useFetchArray = (url) => {
     isEmpty: data && data.length === 0,
   };
 };
-
-const API_URL = "https://jsonplaceholder.typicode.com";
 
 // posts
 export const usePosts = () => {
